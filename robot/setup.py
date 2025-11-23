@@ -1,4 +1,6 @@
 from setuptools import find_packages, setup
+from glob import glob
+import os
 
 package_name = 'robot'
 
@@ -8,8 +10,9 @@ setup(
     packages=find_packages(exclude=['test']),
     data_files=[
         ('share/ament_index/resource_index/packages',
-            ['resource/' + package_name]),
+            ['resource/robot']),
         ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name + '/launch', glob('launch/*.launch.py')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -24,9 +27,9 @@ setup(
     },
     entry_points={
         'console_scripts': [
-        'motor = robot.motor:main',
-        'teleop = robot.teleop:main',          
-        'ximu3_publisher = robot.ximu3_publisher:main',
+            'motor = robot.motor:main',
+            'teleop = robot.teleop:main',
+            'ximu3_publisher = robot.ximu3_publisher:main',
         ],
     },
 )
